@@ -1,108 +1,87 @@
 <!doctype html>
 <html>
 <head>
-<style>
+<link rel="stylesheet" type="text/css" href="stile.css">
 
 
 
-
-#rectangle{
-position: absolute;
-width: 723px;
-height: 732px;
-left: 215px;
-top: 115px;
-background: radial-gradient(70% 70% at 50% 50%, rgba(0, 223, 223, 0.1) 0%, rgba(5, 105, 255, 0) 100%);
-box-sizing: border-box;
-box-shadow: inset 8px 8px 4px rgba(0, 0, 0, 0.25);
-border-radius: 26px;
-}
-
-.border-gradient {
-  position: absolute;
-  border: 10px solid;
-  left: 210px;
-  top: 115px;
-  width: 723px;
-  height: 732px;
-  border-image-slice: 100;
-  border-width: 5px;
-  border-radius: 25px;
-}
-.border-gradient-purple {
-  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-}
-input[type=text] {
-  position: absolute;
-  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid black;
-  border-radius: 4px;
-  left: 330px;
-  top: 315px;
-}
-input[type=password] {
-  position: absolute;
-  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid black;
-  border-radius: 4px;
-  left: 330px;
-  top: 415px;
-}
-input[type=submit] {
-  position: absolute;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  padding: 12px 20px;
-  left: 515px;
-  top: 555px;
-}
-
-</style>
 <title>CHEXMAN</title>
 </head>
 
 <body>
-<div id="rectangle"></div>
+<div id="Head"></div>
+<div id="TittleRectangle"></div>
+<div id="Tittle"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;CHEXMAN</div>
+<img src="log.png">
+<div class="navigation">
+		<ul>
+			<li class="list active">
+				<b></b>
+				<b></b>
+				<a href="#"> 
+					<span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+					<span class="title">Home</span>
+				</a>
+			</li>
+			<li class="list">
+			<b></b>
+			<b></b>
+				<a href="#">
+					<span class="icon"><ion-icon name="help-circle-outline"></ion-icon></ion-icon></span>
+					<span class="title">Information</span>
+				</a>
+			</li>
+		</ul>
+	</div>
 
-<div class="on-light">
-    <id class="border-gradient border-gradient-purple">  
-</id>
-  </div>
-<!-- CAMPOS DE USER Y PASSWORD -->
+
+<!-- User & Password -->
 <form action="" method="post">
-    <input type="text" id="User" name="User" placeholder="User..." /><br><br>
-    <input type="password" id="Password" name="Password" placeholder="Password..." /><br><br>
+    <input type="text" id="User" name="login" placeholder="User..." /><br><br>
+    <input type="password" id="Password" name="password" placeholder="Password..." /><br><br>
     <input type="submit" value="¡enviarme!" /><br><br><br>
-    
 </form>
+
 <?php
 
-//VARIABLES
-$ID_user = "Jonatan";
-$ID_password = "ssssssss";
-
 if ($_POST) {
-  //ESCRIBO LOS DATOS INTRODUCIDOS
-    echo $_POST['User'];
-    echo "<br>". $_POST['Password'];
-
-    //COMPARO Y DOY O NO ACCESO
-    if ($ID_user === $_POST['User'] and $ID_password === $_POST['Password'])
-    {
-      echo "<br>"."buena esa man";
-    }
-    else
-    {
-      echo "<br>"."cagaste";
-    }
+  //Print data
+    echo $_POST['login'];
+    echo "<br>". $_POST['password'];
 }
+  ?>
+
+
+  <!-- Conection with BBDD -->
+
+  <?php
+try{
+
+	$base=new PDO("mysql:host=localhost; dbname=chexman","gurseva", "1122");
+	$base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM users WHERE Name= :login and Password= :password";
+  	$resultado= $base -> prepare ($sql);
+  	$login = htmlentities(addslashes($_POST["login"]));
+  	$password = htmlentities(addslashes($_POST["password"]));
+  	$resultado->bindValue(":login", $login);
+  	$resultado->bindValue(":password", $password);
+  	$resultado->execute();
+  	$numero_registro=$resultado->rowCount();
+  	if($numero_registro!=0){
+
+		echo "<h2> Adelante!!<h2>";
+
+  	}else{
+
+		echo "<h2> Prueba otra vez<h2>";
+		header("chexman.php");
+
+	}
+
+  }catch(Exception $e){
+	  die("Error: ". $e->getMessage());
+  }
 ?>
+
 </body>
 </html>
