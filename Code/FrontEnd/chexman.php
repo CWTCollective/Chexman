@@ -39,9 +39,11 @@
 <form action="" method="post">
     <input type="text" id="User" name="login" placeholder="User..." /><br><br>
     <input type="password" id="Password" name="password" placeholder="Password..." /><br><br>
-    <input type="submit" value="¡enviarme!" /><br><br><br>
+    <input type="submit" class="enter" value="¡enviarme!" /><br><br><br>
 </form>
-
+<form method="post" action="registro.php">
+  <input type="submit" class="registro" value="Registrarse">
+</form>
 <?php
 
 if ($_POST) {
@@ -56,8 +58,8 @@ if ($_POST) {
 
   <?php
 try{
-
-	$base=new PDO("mysql:host=localhost; dbname=chexman","gurseva", "1122");
+	include("Datos_conexion.php");
+	$base=new PDO($db, $db_usuario, $db_contra);
 	$base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "SELECT * FROM users WHERE Name= :login and Password= :password";
   	$resultado= $base -> prepare ($sql);
