@@ -1,5 +1,5 @@
 <?php
-$db='mysql:dbname=chexman;host=localhost';
-$db_usuario="root";
-$db_contra='';
+$_SESSION['db']=$db='mysql:dbname=chexman;host=localhost';
+$_SESSION['db_usuario']="root";
+$_SESSION['db_contra']='';
 ?>
