@@ -12,6 +12,7 @@
             <td><select name="expense_type">    
                <option value ="B">Breakfast</option>
                <option value ="L">Lunch</option>
+               <option value ="S">Dinner</option>
                <option value ="TB">Bus</option>
                <option value ="TM">Metro</option>
                <option value ="TT">Train</option>

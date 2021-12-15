@@ -33,23 +33,11 @@
 
 
 <!-- User & Password -->
-<form action="" method="post">
+<form  method="post">
     <input type="text" id="User" name="login" placeholder="User..." /><br><br>
-    <input type="password" id="Password" name="password" placeholder="Password..." /><br><br>
-    <input type="submit" formaction="appuser_login.php" class="enter" value="¡enviarme!" /><br><br><br>
+    <input type="password" id="Password" name="password"  placeholder="Password..." /><br><br>
+    <input type="submit" formaction="appuser_menu.php" class="enter" value="Login"  /><br><br><br>
 	
 </form>
-
-<button type=“button”><a href=registro.php>Register new user</a></button><br><br>
-<button type=“button”><a href=ManageTickets/crea_Ticket.php>Input new expense</a></button>
-<?php
-
-if ($_POST) {
-  //Print data
-    echo $_POST['login'];
-    echo "<br>". $_POST['password'];
-}
-  ?>
-  
 </body>
 </html>

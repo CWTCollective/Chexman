@@ -10,11 +10,11 @@ $consulta="INSERT INTO tickets (id_User , Ticket_Type, Create_Date, Expense_Date
             . "', '" . $_POST['expense_type'] 
             . "', '". date("Y-m-d") 
             . "', '". $_POST['expense_date'] 
-            . "', '" . $_POST['amount'] ."')";
-echo   $consulta   ;
+            . "', " . $_POST['amount'] .")";
     $resultado=mysqli_query($base, $consulta);
         if($resultado){
             echo "Record inserted sucessfully";
+            log_action( 3, $consulta);
         }else{
             echo "Failed to insert record";
         }
@@ -25,3 +25,4 @@ echo   $consulta   ;
 	die("Error: ". $e->getMessage());
   }
     ?>
+    <button type=“button”><a href=../appuser_menu.php>Back to Main Page</a></button>
