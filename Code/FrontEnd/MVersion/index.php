@@ -9,7 +9,9 @@
 <div id="Head"></div>
 <div id="TittleRectangle"></div>
 <div id="Tittle"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;CHEXMAN</div>
-<img src="log.png">
+
+<img src=Resources/log-in.png>
+
 <div class="navigation">
 		<ul>
 			<li class="list active">
